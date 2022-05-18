@@ -13,7 +13,7 @@ from fnx.main import mk_ctxobj
 # @C.option('-s','--script','script' ,is_flag=True, help='Set this Flag For use within scripts(see commandflags)')
 @C.option('-y','--yes','yes', is_flag=True, help="Dont Ask Questions just do it!")
 @C.pass_context
-def entry_point(ctx,yes,script,verbose):
+def entry_point(ctx,yes):
 	"""Throttlestop : \n Control MSR: BiDirectional Processor Hot """
 	  # ensure that ctx.obj exists and is a dict (in case `cli()` is called
     # by means other than the `if` block below)

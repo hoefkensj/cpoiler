@@ -1,0 +1,6 @@
+#!/home/hoefkens/Development/Code/Python/Projects_ACTIVE/ThrottleStop/venv/bin/python
+# -*- coding: utf-8 -*-
+# Launcher for Nuitka
+
+import nuitka.__main__
+nuitka.__main__.main()
