@@ -1,12 +1,12 @@
 CC=gcc
 CCACHE_DIR=/home/hoefkens/.cache/Nuitka/ccache
-CCACHE_LOGFILE=/home/hoefkens/Development/Code/Python/Projects_ACTIVE/ThrottleStop/..build/ccache-321041.txt
+CCACHE_LOGFILE=/home/hoefkens/Development/Code/Python/Projects_ACTIVE/ThrottleStop/..build/ccache-4176421.txt
 CCCOM=$CC -o $TARGET -c $CFLAGS $CCFLAGS $_CCCOMCOM $SOURCES
 CFILESUFFIX=.c
 CPPDEFINES=['__NUITKA_NO_ASSERT__', '_NUITKA_CONSTANTS_FROM_INCBIN', '_NUITKA_FROZEN=0', '_NUITKA_EXE']
 CPPDEFPREFIX=-D
 CPPDEFSUFFIX=
-CPPPATH=['/usr/include/python3.10', '.', '/home/hoefkens/.local/lib/python3.10/site-packages/nuitka/build/include', '/home/hoefkens/.local/lib/python3.10/site-packages/nuitka/build/static_src']
+CPPPATH=['/usr/include/python3.10', '.', '/home/hoefkens/.cache/pypoetry/virtualenvs/msr-bdph-t7oJSlKd-py3.10/lib/python3.10/site-packages/nuitka/build/include', '/home/hoefkens/.cache/pypoetry/virtualenvs/msr-bdph-t7oJSlKd-py3.10/lib/python3.10/site-packages/nuitka/build/static_src']
 CPPSUFFIXES=['.c', '.C', '.cxx', '.cpp', '.c++', '.cc', '.h', '.H', '.hxx', '.hpp', '.hh', '.F', '.fpp', '.FPP', '.m', '.mm', '.S', '.spp', '.SPP', '.sx']
 CXX=g++
 CXXCOM=$CXX -o $TARGET -c $CXXFLAGS $CCFLAGS $_CCCOMCOM $SOURCES
@@ -60,4 +60,4 @@ clang_mode=False
 msvc_mode=False
 mingw_mode=False
 clangcl_mode=False
-PATH=/usr/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/cuda/bin:/opt/cuda/nsight_compute:/opt/cuda/nsight_systems/bin:/opt/cxoffice/bin:/home/hoefkens/.dotnet/tools:/var/lib/flatpak/exports/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin:/opt/cuda/bin:/opt/cuda/nsight_compute:/opt/cuda/nsight_systems/bin:/opt/cxoffice/bin:/usr/lib/jvm/default/bin:/home/hoefkens/.bashhub/bin
+PATH=/home/hoefkens/.cache/pypoetry/virtualenvs/msr-bdph-t7oJSlKd-py3.10/bin:/usr/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/cuda/bin:/opt/cuda/nsight_compute:/opt/cuda/nsight_systems/bin:/opt/cxoffice/bin:/home/hoefkens/.dotnet/tools:/var/lib/flatpak/exports/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin:/opt/cuda/bin:/opt/cuda/nsight_compute:/opt/cuda/nsight_systems/bin:/opt/cxoffice/bin:/usr/lib/jvm/default/bin:/home/hoefkens/.bashhub/bin
