@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import click as C
 import fnx.check
-import fnx.reset
-import fnx.set
 import fnx.main
 import fnx.msr
 import fnx.logic
@@ -35,12 +33,16 @@ def proc_msr(ctx):
 
 @C.pass_context
 def proc_chk(ctx):
-	check=fnx.msr.rdmsr_0x1FC()
-	rd_bss=fnx.logic.rebase2ctx('R')
-	BDPH=fnx.check.BDPROCHOT()
-	bdph=str(int(BDPH))
-	dct={'chk':[rd_bss,[BDPH,bdph]]}
-	return dct
+	str_binary=fnx.msr.rdmsr_0x1FC()
+	str_hexx,lst_nibb=fnx.logic.rebase(str_binary)
+	BD_PROCHOT_ENABLED=fnx.msr.rdmsr_BDPROCHOT()
+	result = {
+		'BINN' 								: str_binary,
+		'NIBB' 								: lst_nibb,
+		'HEXX'								:	str_hexx,
+		'BD_PROCHOT_ENABLED'	:	BD_PROCHOT_ENABLED,
+		}
+	return result
 		
 
 @C.pass_context

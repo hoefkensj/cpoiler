@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "msr_bdph"
+name = "ThrottleStop"
 version = "0.1.0"
 description = ""
 authors = ["Hoefkens Jeroen <hoefkens.j@gmail.com>"]

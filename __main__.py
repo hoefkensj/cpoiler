@@ -1,8 +1,14 @@
 #!/usr/bin/sudo python
-import cli
+def ui_cli():
+	import interface.cli.cli
+	interface.cli.cli.entry_point(
+		prog_name	=	"ThrottleStop",
+		)
 
 if __name__ == '__main__':
-	cli.entry_point()
+	ui_cli()
+
+
 
 
 

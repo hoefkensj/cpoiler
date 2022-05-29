@@ -1,1 +1,0 @@
-/home/hoefkens/.cache/pypoetry/virtualenvs/msr-bdph-gH-tbgay-py3.10/lib/python3.10/site-packages/nuitka/build/static_src/MetaPathBasedLoader.c
