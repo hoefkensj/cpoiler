@@ -4,7 +4,7 @@ import fnx.check
 import fnx.main
 import fnx.msr
 import fnx.logic
-
+import fnx.stdfn
 
 
 @C.pass_context
@@ -15,9 +15,11 @@ def proc_msr_test(ctx):
 def proc_msr_load(ctx):
 	return fnx.msr.load_msr()
 
+
+
 @C.pass_context
 def proc_msr(ctx):
-	C.echo('MSR access:')
+	std_tblout('MSR access:')
 	mod_loaded=proc_msr_test()
 	if not mod_loaded:
 		C.echo('\x1b[F\x1b[25G\x1b[31mFAIL\x1b[0m')
@@ -31,8 +33,8 @@ def proc_msr(ctx):
 	return mod_loaded
 
 
-@C.pass_context
-def proc_chk(ctx):
+
+def proc_chk():
 	str_binary=fnx.msr.rdmsr_0x1FC()
 	str_hexx,lst_nibb=fnx.logic.rebase(str_binary)
 	BD_PROCHOT_ENABLED=fnx.msr.rdmsr_BDPROCHOT()
@@ -42,6 +44,8 @@ def proc_chk(ctx):
 		'HEXX'								:	str_hexx,
 		'BD_PROCHOT_ENABLED'	:	BD_PROCHOT_ENABLED,
 		}
+		
+	fnx.stdfn.std_row(result)
 	return result
 		
 

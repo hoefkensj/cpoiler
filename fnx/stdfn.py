@@ -3,18 +3,55 @@ import click as C
 import types
 import fnx.main
 
-
+def item(**k):
+	G=k.get('G')
+	S=k.get('S')
+	m=k.get('m')
+	return f'\x1b[{G}G\x1b[0m\x1b[{m}m{S}'
+	
 def dec_boxwrap(fn):
 	def fn_wrap(*a,**k):
 		C.echo('╔══════════╦════════════╦══════════════════════════════════════════════╗')
-		fn(*a,**k)
+		C.echo(fn())
 		C.echo('╚══════════╩════════════╩══════════════════════════════════════════════╝')
+	return fn_wrap
 
-@dec_boxwrap()
-def C_write_stdo(dict):
-	C.echo(dict['HEXX'])
-	C.echo(dict['NIBB'])
-	C.echo(dict['BD_PROCHOT_ENABLED'])
+
+@dec_boxwrap
+def std_boxrow(offs=[0,0,12,13,25,15,24,26,29,67,72]):
+	print(offs[1])
+	row_boxdraw=''
+	row_boxdraw+=f"{item(G=offs[0],m=0,S='')}"
+	row_boxdraw+=f"{item(G=offs[1],m=0,S='╠')}"
+	row_boxdraw+=f"{item(G=offs[2],m=0,S='╬')}"
+	row_boxdraw+=f"{item(G=offs[3],m=0,S='═')}"
+	row_boxdraw+=f"{item(G=offs[4],m=0,S='╬')}"
+	row_boxdraw+=f"{item(G=offs[5],m=0,S='═')}"
+	row_boxdraw+=f"{item(G=offs[6],m=0,S='═')}"
+	row_boxdraw+=f"{item(G=offs[10],m=0,S='║')}"
+	return row_boxdraw
+	
+	
+	
+def std_row(data,offs=[0,0,2,12,14,15,24,26,29,67,70]):
+	c1	=	item(G=offs[2],m=0,S='')
+	c2	=	item(G=offs[5],m=0,S=data['HEXX'])
+	c3	=	item(G=offs[8],m=0,S=data['NIBB'])
+	std_boxrow()
+
+
+
+def std_tblout(*a,**k):
+	
+	return std_boxrow()
+
+# @dec_boxwrap
+# def C_write_stdo(dict):
+# 	C.echo(dict)
+
+
+	# C.echo(dict['NIBB'])
+	# C.echo(dict['BD_PROCHOT_ENABLED'])
 	
 
 
@@ -79,17 +116,17 @@ def fn(ctx):
 @C.pass_context
 def table(ctx):
 	s= ' '
-	h='\u2550'
+	
 	trc='\u2557'
 	tlc='\u2554'
 	tt='\u2566'
 	bt='\u2569'
 	brc='\u255d'
 	blc='\u255a'
-	csd='\u256C'
+
 	cse='\u2563'
 	css='\u2560'
-	csi='\u256C\u2550'
+
 	uni= '\u2500\u2501\u2502\u2503\u2504\u2505\u2506\u2507\u2508\u2509\u2510\u2511\u2512\u2513\u2514\u2515\u2516', \
   '\u2517\u2518\u2519\u2520\u2521\u2522\u2523\u2524\u2525\u2526\u2527\u2528\u2529\u2530\u2531\u2532\u2533\u2534\u2535\u2536\u2537\u2538\u2539\u2540\u2541\u2542\u2543\u2544\u2545\u2546\u2547\u2548\u2549\u2550\u2551\u2552\u2553\u2554\u2555\u2556\u2557\u2558\u2559\u2560\u2561\u2562\u2563\u2564\u2565\u2566\u2567\u2568\u2569\u2570\u2571\u2572\u2573\u2574\u2575\u2576\u2577\u2578\u2579\u2580\u2581\u2582\u2583\u2584\u2585\u2586\u2587\u2588\u2589\u2590\u2591\u2592\u2593\u2594\u2595\u2596\u2597\u2598\u2599'
 
@@ -144,11 +181,11 @@ def table(ctx):
 
 
 
-def item(**k):
-	G=k.get('G')
-	S=k.get('S')
-	m=k.get('m')
-	return f'\x1b[{G}G\x1b[0mG\x1b[{m}m{S}'
+
+
+
+
+
 
 def rowboat(sel,**k):
 	G 			=   k.get('G') 			 	or			37

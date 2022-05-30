@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import textwrap
-import click as C
 
 def xnot_bitwise(A):
 	ln=len(A)

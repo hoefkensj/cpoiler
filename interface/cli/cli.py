@@ -30,7 +30,7 @@ def entry_point(ctx,y,script,stdout):
 def cli_chk(ctx):
 	"""Check MSR: 0x1FC[0]"""
 	check=fnx.proc.proc_chk()
-	fnx.stdfn.C_write_stdo(check)
+
 	
 
 @C.command()
