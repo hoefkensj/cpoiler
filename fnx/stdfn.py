@@ -19,7 +19,6 @@ def dec_boxwrap(fn):
 
 @dec_boxwrap
 def std_boxrow(offs=[0,0,12,13,25,15,24,26,29,67,72]):
-	print(offs[1])
 	row_boxdraw=''
 	row_boxdraw+=f"{item(G=offs[0],m=0,S='')}"
 	row_boxdraw+=f"{item(G=offs[1],m=0,S='╠')}"
@@ -33,11 +32,14 @@ def std_boxrow(offs=[0,0,12,13,25,15,24,26,29,67,72]):
 	
 	
 	
-def std_row(data,offs=[0,0,2,12,14,15,24,26,29,67,70]):
-	c1	=	item(G=offs[2],m=0,S='')
-	c2	=	item(G=offs[5],m=0,S=data['HEXX'])
-	c3	=	item(G=offs[8],m=0,S=data['NIBB'])
-	std_boxrow()
+def std_row(data,head,offs):
+	offss=[1+offs,(1+offs+1+len(head)+1),(1+offs+1+len(head)+1+1+len(data['HEXX'])+1)]
+	c1	=	item(G=offss[0],m=0,S=head)
+	c2	=	item(G=offss[1],m=0,S=data['HEXX'])
+	c3	=	item(G=offss[2],m=0,S='│'.join(data['NIBB']))
+	c= f'{c1}{c2}{c3}'
+
+	return c
 
 
 

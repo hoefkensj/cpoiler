@@ -30,26 +30,41 @@ def entry_point(ctx,y,script,stdout):
 def cli_chk(ctx):
 	"""Check MSR: 0x1FC[0]"""
 	check=fnx.proc.proc_chk()
-
+	std_out=fnx.stdfn.std_row(check,'MSR #0x1FC' ,2)
+	C.echo(std_out)
 	
 
 @C.command()
 @C.pass_context
 def cli_set(ctx):
 	"""Set BD_PROCHOT Flag (set to 1)"""
-	sett=fnx.proc.proc_set()
-	fnx.stdfn.C_write_stdo(sett,sett['formats'][:2])
-	fnx.msr.wrmsr()
+	check	= fnx.proc.proc_chk()
+	orr,result	=	fnx.proc.proc_set(check)
+	# sett=
+	
+	std_out=fnx.stdfn.std_row(check,'MSR #0x1FC' ,2)
+	C.echo(std_out)
+	std_out=fnx.stdfn.std_row(orr,' OR #0x1FC' ,2)
+	C.echo(std_out)
+	std_out=fnx.stdfn.std_row(result,'NEW #0x1FC' ,2)
+	C.echo(std_out)
+	fnx.msr.wrmsr_0x1FC(result['HEXX'])
 	return
 	
 @C.command()
 @C.pass_context
 def cli_clr(ctx):
 	"""Clear BD_PROCHOT Flag (set to 0)"""
-	clear=fnx.proc.proc_clr()
+	check	= fnx.proc.proc_chk()
+	andd,result	=	fnx.proc.proc_clr(check)
 	
-	ctx.obj['stdecho'](clear,R_HEX=clear[0][0])
-	fnx.msr.wrmsr()
+	std_out=fnx.stdfn.std_row(check,'MSR #0x1FC' ,2)
+	C.echo(std_out)
+	std_out=fnx.stdfn.std_row(andd,'AND #0x1FC' ,2)
+	C.echo(std_out)
+	std_out=fnx.stdfn.std_row(result,'NEW #0x1FC' ,2)
+	C.echo(std_out)
+	fnx.msr.wrmsr_0x1FC(result['HEXX'])
 	return
 
 @C.command()

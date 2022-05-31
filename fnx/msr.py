@@ -29,6 +29,10 @@ def rdmsr_0x1FC(addr='0x1FC'):
 
 def wrmsr_0x1FC(val):
 	addr='0x1FC'
-	write=f'0b{val}'
+	write=f'0x{val}'
+	print(write)
 	wrote=wrmsr(addr=addr,write=write).stdout
 	return wrote
+	
+
+'000000000000000000000000000000000000000110000000000001011100'

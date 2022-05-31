@@ -1,16 +1,5 @@
 #!/usr/bin/env python
-import textwrap
-
-def xnot_bitwise(A):
-	ln=len(A)
-	# remove leading “0x”
-	# A = A.lstrip('0x')
-	A = A[2:]
-	# pad both strings to same length
-	A = A.rjust(ln, "0")
-	# calculate nand for each pair of digits
-	output = ''.join([xnot(A[i]) for i in range(ln)])
-	return output.upper()
+# import textwrap
 
 def xnot(a):
 	return xnand(a, a)
@@ -20,17 +9,44 @@ def xnand(a, b):
 	b = int(b, 16)
 	nand = ~(a & b) % 16 # bitwise nand
 	return hex(nand).lstrip('0x')
+	
+def nand(a, b) -> bin:
+	a = int(a, 2) # convert to integer
+	b = int(b, 2)
+	nand = ~(a & b) % 2 # bitwise nand
+	return str(nand)
 
+def OR(a, b) -> bin:
+	a = int(a, 2) # convert to integer
+	b = int(b, 2)
+	result =f'{(a | b) % 2}' # bitwise nand
+	return result
+
+def AND(a, b) -> bin:
+	a = int(a, 2) # convert to integer
+	b = int(b, 2)
+	result =f'{(a & b) % 2}' # bitwise nand
+	return result
+	
 def xnand_bitwise(A, B):
 	ln=len(A if len(A)>len(B) else B)
 	A = A.lstrip('0x').rjust(ln, "0")
 	B = B.lstrip('0x').rjust(ln, "0")
-	output = ''.join([xnand(A[i], B[i]) for i in range(ln)])
-	return "0x" + output.upper()
+	output = ''.join([AND(A[i], B[i]) for i in range(ln)])
+	return output.upper()
+
+def or_bitwise(A, B):
+	ln=len(A)
+	result=''.join([OR(A[i],B[i]) for i in range(len(A))])
+	return result
+
+def and_bitwise(A, B):
+	ln=len(A)
+	result=''.join([AND(A[i],B[i]) for i in range(len(A))])
+	return result
 
 def xtonib(x):
 	hex(x)
-	
 
 def rebase(binroot):
 	# root=ctx.obj['MSR'].get(term) or ctx.obj['STATIC'].get(term)
