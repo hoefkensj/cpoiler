@@ -34,5 +34,3 @@ def wrmsr_0x1FC(val):
 	wrote=wrmsr(addr=addr,write=write).stdout
 	return wrote
 	
-
-'000000000000000000000000000000000000000110000000000001011100'

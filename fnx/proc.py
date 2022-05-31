@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import click as C
-import fnx.check
 import fnx.main
 import fnx.msr
 import fnx.logic
@@ -15,11 +14,9 @@ def proc_msr_test(ctx):
 def proc_msr_load(ctx):
 	return fnx.msr.load_msr()
 
-
-
 @C.pass_context
 def proc_msr(ctx):
-	std_tblout('MSR access:')
+	C.echo('MSR access:')
 	mod_loaded=proc_msr_test()
 	if not mod_loaded:
 		C.echo('\x1b[F\x1b[25G\x1b[31mFAIL\x1b[0m')
@@ -32,8 +29,6 @@ def proc_msr(ctx):
 		C.echo('\x1b[F\x1b[25G\x1b[32mOK\x1b[0m')
 	return mod_loaded
 
-
-
 def proc_chk():
 	str_binary=fnx.msr.rdmsr_0x1FC()
 	str_hexx,lst_nibb=fnx.logic.rebase(str_binary)
@@ -45,8 +40,6 @@ def proc_chk():
 		'BIT0'								:	BD_PROCHOT_ENABLED,
 		}
 	return result
-		
-
 
 def proc_set(check):
 	str_binary	= f'{"0"*(len(check["BINN"])-1)}1'
@@ -67,8 +60,6 @@ def proc_set(check):
 
 	return orr,result
 
-
-
 def proc_clr(check):
 	str_binary	= f'{"1"*(len(check["BINN"])-1)}0'
 	str_hexx,lst_nibb=fnx.logic.rebase(str_binary)
@@ -87,7 +78,6 @@ def proc_clr(check):
 		'BIT0'								:	'0',		}
 
 	return andd,result
-
 
 @C.pass_context
 def proc_wrMSR(ctx):
