@@ -9,16 +9,25 @@ def item(**k):
 	m=k.get('m')
 	return f'\x1b[{G}G\x1b[0m\x1b[{m}m{S}'
 	
-def dec_boxwrap():
-	table_top=('╔═════════════╦════════════════════╦══════════════════════════════════════════════════════════════════════════════════════════════╗')
-	table_bot=('╚═════════════╩════════════════════╩══════════════════════════════════════════════════════════════════════════════════════════════╝')
-	table='{table_top}{rows}{table_bot}'.format(table_top=table_top,rows='{rows}',table_bot=table_bot)
+def dec_boxdraw(lvl,gs):
+	table={}
+	box=''
+	table['top']=['╔','═','╦','═','╦','═','╗']
+	table['dat']=['║',' ','║',' ','║',' ','║']
+	table['sep']=['╠','═','╬','═','╬','═','╣']
+	table['bot']=['╚','═','╩','═','╩','═','╝']
+	
+	for i in gs:
+		box+=f'{item(G=(gs[i]-2),m=0,S=table[lvl][i])}'
+		# box+=f'{item(G=(gs[i+1]-2),m=0,S=table[lvl][i+1])}'
+	table='{table_top}{rows}{table_bot}'.format(table_top=table['top'],rows='{rows}',table_bot=table_bot)
 	return table
-def std_boxrow(offs=[0,0,12,13,25,15,24,26,29,67,72]):
+	
+def std_boxrow(offs):
 	row_boxdraw=''
 	# row_boxdraw+=f"{item(G=offs[1],m=0,S='')}"
 	# row_boxdraw+=f"{item(G=offs[2],m=0,S='╠')}"
-	# row_boxdraw+=f"{item(G=offs[3],m=0,S='╬')}"
+	# row_boxdraw+=f"{item(G=offs[3],m=0,S='╬')}"    =[0,0,12,13,25,15,24,26,29,67,72]
 	# row_boxdraw+=f"{item(G=offs[4],m=0,S='═')}"
 	# row_boxdraw+=f"{item(G=offs[5],m=0,S='╬')}"
 	# row_boxdraw+=f"{item(G=offs[6],m=0,S='═')}"
