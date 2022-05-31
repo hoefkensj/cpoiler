@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from fnx.main import mk_cmd
-
+import os
 lsmod= mk_cmd('lsmod')
 modprobe= mk_cmd("modprobe")
 rdmsr= mk_cmd("rdmsr -X0")
@@ -34,3 +34,23 @@ def wrmsr_0x1FC(val):
 	wrote=wrmsr(addr=addr,write=write).stdout
 	return wrote
 	
+def cpu_freq():
+	sys_cpu=os.listdir('/sys/devices/system/cpu/')
+	cpu_n=0
+	freqs=[]
+	while True:
+		cpu=os.path.join('/sys/devices/system/cpu',f'cpu{cpu_n}','cpufreq/scaling_cur_freq')
+		if not os.path.isfile(cpu):
+			break
+		cpu_n+=1
+	print(cpu_n)
+	
+	cpus=[f'cpu{nr}' for nr in range(cpu_n)]
+	cpu_freqfiles=[os.path.join('/sys/devices/system/cpu',cpu,'cpufreq/scaling_cur_freq') for cpu in cpus]
+	for i,file in enumerate(cpu_freqfiles):
+		with open(file,'r') as f:
+			freq=f.read().strip()
+		freqs+=[int(freq)]
+	avg=(sum(freqs)/len(freqs))
+	print(avg)
+cpu_freq()

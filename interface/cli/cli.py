@@ -19,8 +19,8 @@ INFO=static.locale.loadloc('en')['cli']['main']['info']
 @C.pass_context
 def entry_point(ctx,y,script,stdout):
 	"""Throttlestop : \n Control MSR: BiDirectional Processor Hot """
-	  # ensure that ctx.obj exists and is a dict (in case `cli()` is called
-    # by means other than the `if` block below)
+	# ensure that ctx.obj exists and is a dict (in case `cli()` is called
+	# by means other than the `if` block below)
 	ctx.ensure_object(dict)
 	fnx.main.su()
 
@@ -40,13 +40,11 @@ def cli_set(ctx):
 	"""Set BD_PROCHOT Flag (set to 1)"""
 	check	= fnx.proc.proc_chk()
 	orr,result	=	fnx.proc.proc_set(check)
-	# sett=
+	std_out=[0,0,0]
+	std_out[0]=fnx.stdfn.std_row(check,'MSR #0x1FC' ,2)
+	std_out[1]=fnx.stdfn.std_row(orr,' OR #0x1FC' ,2)
+	std_out[2]=fnx.stdfn.std_row(result,'NEW #0x1FC' ,2)
 	
-	std_out=fnx.stdfn.std_row(check,'MSR #0x1FC' ,2)
-	C.echo(std_out)
-	std_out=fnx.stdfn.std_row(orr,' OR #0x1FC' ,2)
-	C.echo(std_out)
-	std_out=fnx.stdfn.std_row(result,'NEW #0x1FC' ,2)
 	C.echo(std_out)
 	fnx.msr.wrmsr_0x1FC(result['HEXX'])
 	return
@@ -57,12 +55,10 @@ def cli_clr(ctx):
 	"""Clear BD_PROCHOT Flag (set to 0)"""
 	check	= fnx.proc.proc_chk()
 	andd,result	=	fnx.proc.proc_clr(check)
-	
-	std_out=fnx.stdfn.std_row(check,'MSR #0x1FC' ,2)
-	C.echo(std_out)
-	std_out=fnx.stdfn.std_row(andd,'AND #0x1FC' ,2)
-	C.echo(std_out)
-	std_out=fnx.stdfn.std_row(result,'NEW #0x1FC' ,2)
+	std_out=[0,0,0]
+	std_out[1]=fnx.stdfn.std_row(check,'MSR #0x1FC' ,2)
+	std_out[2]=fnx.stdfn.std_row(andd,'AND #0x1FC' ,2)
+	std_out[3]=fnx.stdfn.std_row(result,'NEW #0x1FC' ,2)
 	C.echo(std_out)
 	fnx.msr.wrmsr_0x1FC(result['HEXX'])
 	return

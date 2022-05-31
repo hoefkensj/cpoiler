@@ -11,26 +11,27 @@ def item(**k):
 	
 def dec_boxwrap(fn):
 	def fn_wrap(*a,**k):
-		C.echo('╔══════════╦════════════╦══════════════════════════════════════════════╗')
-		C.echo(fn())
-		C.echo('╚══════════╩════════════╩══════════════════════════════════════════════╝')
+		table_top=('╔══════════╦════════════╦══════════════════════════════════════════════╗')
+		table_data=
+		table_bot=('╚══════════╩════════════╩══════════════════════════════════════════════╝')
 	return fn_wrap
 
 @dec_boxwrap
 def std_boxrow(offs=[0,0,12,13,25,15,24,26,29,67,72]):
 	row_boxdraw=''
-	row_boxdraw+=f"{item(G=offs[0],m=0,S='')}"
-	row_boxdraw+=f"{item(G=offs[1],m=0,S='╠')}"
-	row_boxdraw+=f"{item(G=offs[2],m=0,S='╬')}"
-	row_boxdraw+=f"{item(G=offs[3],m=0,S='═')}"
-	row_boxdraw+=f"{item(G=offs[4],m=0,S='╬')}"
-	row_boxdraw+=f"{item(G=offs[5],m=0,S='═')}"
+	row_boxdraw+=f"{item(G=offs[1],m=0,S='')}"
+	row_boxdraw+=f"{item(G=offs[2],m=0,S='╠')}"
+	row_boxdraw+=f"{item(G=offs[3],m=0,S='╬')}"
+	row_boxdraw+=f"{item(G=offs[4],m=0,S='═')}"
+	row_boxdraw+=f"{item(G=offs[5],m=0,S='╬')}"
 	row_boxdraw+=f"{item(G=offs[6],m=0,S='═')}"
-	row_boxdraw+=f"{item(G=offs[10],m=0,S='║')}"
+	row_boxdraw+=f"{item(G=offs[7],m=0,S='═')}"
+	row_boxdraw+=f"{item(G=offs[8],m=0,S='║')}"
 	return row_boxdraw
-	
+
+@dec_boxwrap
 def std_row(data,head,offs):
-	offss=[1+offs,(1+offs+1+len(head)+1),(1+offs+1+len(head)+1+1+len(data['HEXX'])+1)]
+	offss=[1+offs,(offs+len(head)+3),(offs+len(head)+len(data['HEXX'])+5)]
 	c1	=	item(G=offss[0],m=0,S=head)
 	c2	=	item(G=offss[1],m=0,S=data['HEXX'])
 	c3	=	item(G=offss[2],m=0,S='│'.join(data['NIBB']))
@@ -81,3 +82,4 @@ def rowboat(sel,**k):
 		}
 	return row[sel]
 	
+a=std_boxrow()
