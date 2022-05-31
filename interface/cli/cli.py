@@ -55,12 +55,19 @@ def cli_clr(ctx):
 	"""Clear BD_PROCHOT Flag (set to 0)"""
 	check	= fnx.proc.proc_chk()
 	andd,result	=	fnx.proc.proc_clr(check)
-	std_out=[0,0,0]
-	std_out[1]=fnx.stdfn.std_row(check,'MSR #0x1FC' ,2)
-	std_out[2]=fnx.stdfn.std_row(andd,'AND #0x1FC' ,2)
-	std_out[3]=fnx.stdfn.std_row(result,'NEW #0x1FC' ,2)
+	std_out=std_box=[0,0,0]
+
+	# C.echo(table)
+	std_out[0],std_box[0]=fnx.stdfn.std_row(check,'MSR #0x1FC' ,2)
+	std_out[1],std_box[1]=fnx.stdfn.std_row(andd,'AND #0x1FC' ,2)
+	
+	std_out[2],std_box[2]=fnx.stdfn.std_row(result,'NEW #0x1FC' ,2)
+	
+	table=fnx.stdfn.dec_boxwrap().format(rows=f'\n{std_box[0]}\n{std_box[1]}\n\n{std_box[2]}\n')
+	
+	C.echo(table)
 	C.echo(std_out)
-	fnx.msr.wrmsr_0x1FC(result['HEXX'])
+	# fnx.msr.wrmsr_0x1FC(result['HEXX'])
 	return
 
 @C.command()

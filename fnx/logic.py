@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import textwrap
 def OR(a, b) -> bin:
 	a = int(a, 2) # convert to integer
 	b = int(b, 2)

@@ -9,35 +9,46 @@ def item(**k):
 	m=k.get('m')
 	return f'\x1b[{G}G\x1b[0m\x1b[{m}m{S}'
 	
-def dec_boxwrap(fn):
-	def fn_wrap(*a,**k):
-		table_top=('╔══════════╦════════════╦══════════════════════════════════════════════╗')
-		table_data=
-		table_bot=('╚══════════╩════════════╩══════════════════════════════════════════════╝')
-	return fn_wrap
-
-@dec_boxwrap
+def dec_boxwrap():
+	table_top=('╔═════════════╦════════════════════╦══════════════════════════════════════════════════════════════════════════════════════════════╗')
+	table_bot=('╚═════════════╩════════════════════╩══════════════════════════════════════════════════════════════════════════════════════════════╝')
+	table='{table_top}{rows}{table_bot}'.format(table_top=table_top,rows='{rows}',table_bot=table_bot)
+	return table
 def std_boxrow(offs=[0,0,12,13,25,15,24,26,29,67,72]):
 	row_boxdraw=''
-	row_boxdraw+=f"{item(G=offs[1],m=0,S='')}"
-	row_boxdraw+=f"{item(G=offs[2],m=0,S='╠')}"
-	row_boxdraw+=f"{item(G=offs[3],m=0,S='╬')}"
-	row_boxdraw+=f"{item(G=offs[4],m=0,S='═')}"
-	row_boxdraw+=f"{item(G=offs[5],m=0,S='╬')}"
-	row_boxdraw+=f"{item(G=offs[6],m=0,S='═')}"
-	row_boxdraw+=f"{item(G=offs[7],m=0,S='═')}"
-	row_boxdraw+=f"{item(G=offs[8],m=0,S='║')}"
+	# row_boxdraw+=f"{item(G=offs[1],m=0,S='')}"
+	# row_boxdraw+=f"{item(G=offs[2],m=0,S='╠')}"
+	# row_boxdraw+=f"{item(G=offs[3],m=0,S='╬')}"
+	# row_boxdraw+=f"{item(G=offs[4],m=0,S='═')}"
+	# row_boxdraw+=f"{item(G=offs[5],m=0,S='╬')}"
+	# row_boxdraw+=f"{item(G=offs[6],m=0,S='═')}"
+	# row_boxdraw+=f"{item(G=offs[7],m=0,S='═')}"
+	row_boxdraw+=f"{item(G=offs[0],m=0,S='║')}"
+	row_boxdraw+=f"{item(G=offs[1],m=0,S='║')}"
+	row_boxdraw+=f"{item(G=offs[2],m=0,S='║')}"
 	return row_boxdraw
 
-@dec_boxwrap
+
 def std_row(data,head,offs):
-	offss=[1+offs,(offs+len(head)+3),(offs+len(head)+len(data['HEXX'])+5)]
-	c1	=	item(G=offss[0],m=0,S=head)
-	c2	=	item(G=offss[1],m=0,S=data['HEXX'])
-	c3	=	item(G=offss[2],m=0,S='│'.join(data['NIBB']))
+	dbx=[]
+	dbx+= [offs-1]
+	dbx+= [(dbx[0]+len(head)+4)]
+	dbx+= [(dbx[1]+len(data['HEXX'])+5)]
+	dbx+=	[(dbx[2]+len('│'.join(data['NIBB']))+1)
+	]
+	box=std_boxrow(offs=dbx)
+	
+	oss=[]
+	oss+=[(1+offs)]
+	oss+=[(oss[0]+len(head)+5)]
+	oss+=[(oss[1]+len(data['HEXX'])+5)]
+	
+	c1	=	item(G=oss[0],m=0,S=head)
+	c2	=	item(G=oss[1],m=0,S=data['HEXX'])
+	c3	=	item(G=oss[2],m=0,S='│'.join(data['NIBB']))
 	c= f'{c1}{c2}{c3}'
 
-	return c
+	return c,box
 
 def rowboat(sel,**k):
 	G 			=   k.get('G') 			 	or			37
@@ -76,10 +87,7 @@ def rowboat(sel,**k):
 	act		=	item(G=G[9],m=0,S=A3)
 	cse		=	item(G=G[10],m=0,S=CSE)
 
-	row= {
-		'rowdat'	: f''.join([head,hexx,nib,act])   ,
-		'rowfx'		: f''.join([css,csi,a1,csd,a2,cse])   ,
-		}
-	return row[sel]
+
+	return '{}{}{}{}{}{}{}{}{}{}'
 	
 a=std_boxrow()
