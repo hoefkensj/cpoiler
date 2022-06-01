@@ -2,6 +2,7 @@
 import click as C
 import types
 import fnx.main
+from ansitable import ANSITable, Column
 
 def item(**k):
 	G=k.get('G')

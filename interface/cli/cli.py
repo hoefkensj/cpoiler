@@ -16,12 +16,17 @@ INFO=static.locale.loadloc('en')['cli']['main']['info']
 @C.option('-m','--minimal','stdout' ,flag_value='m',is_flag=True,help=INFO['opt_y'])
 @C.option('-#','--hex','stdout' ,flag_value='h',is_flag=True,help=INFO['opt_y'])
 @C.option('-b','--bool','stdout' ,flag_value='b',is_flag=True,help=INFO['opt_y'])
+@C.option('-t','--table','table' ,,help=INFO['opt_y'])
 @C.pass_context
 def entry_point(ctx,y,script,stdout):
 	"""Throttlestop : \n Control MSR: BiDirectional Processor Hot """
 	# ensure that ctx.obj exists and is a dict (in case `cli()` is called
 	# by means other than the `if` block below)
 	ctx.ensure_object(dict)
+	
+	if stdout=
+	ctx.obj['']
+
 	fnx.main.su()
 
 
