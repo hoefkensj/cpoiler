@@ -25,7 +25,7 @@ def dec_boxdraw(lvl,gs):
 	return table
 	
 def std_boxrow(offs):
-	row_boxdraw=''
+	row_boxdraw=[0,0,0]
 	# row_boxdraw+=f"{item(G=offs[1],m=0,S='')}"
 	# row_boxdraw+=f"{item(G=offs[2],m=0,S='╠')}"
 	# row_boxdraw+=f"{item(G=offs[3],m=0,S='╬')}"    =[0,0,12,13,25,15,24,26,29,67,72]
@@ -33,19 +33,23 @@ def std_boxrow(offs):
 	# row_boxdraw+=f"{item(G=offs[5],m=0,S='╬')}"
 	# row_boxdraw+=f"{item(G=offs[6],m=0,S='═')}"
 	# row_boxdraw+=f"{item(G=offs[7],m=0,S='═')}"
-	row_boxdraw+=f"{item(G=offs[0],m=0,S='║')}"
-	row_boxdraw+=f"{item(G=offs[1],m=0,S='║')}"
-	row_boxdraw+=f"{item(G=offs[2],m=0,S='║')}"
+	row_boxdraw[0]=["{item(G=offs[0],m=0,S='║')}"]
+	row_boxdraw[1]=["{item(G=offs[1],m=0,S='║')}"]
+	row_boxdraw[1]=["{item(G=offs[2],m=0,S='║')}"]
 	return row_boxdraw
 
 
 def std_row(data,head,offs):
-	dbx=[]
-	dbx+= [offs-1]
-	dbx+= [(dbx[0]+len(head)+4)]
-	dbx+= [(dbx[1]+len(data['HEXX'])+5)]
-	dbx+=	[(dbx[2]+len('│'.join(data['NIBB']))+1)
-	]
+	W=[0,]
+	W+=[offs-1]
+	W+=[W[1]-1]
+	
+	dbx={
+			0	:	[(W[1]-1)],
+			1	:	[(W[2]+len(head)+4)],
+			2	:	[(dbx[1]+len(data['HEXX'])+5)],
+			3	:	[(dbx[2]+len('│'.join(data['NIBB']))+1),
+		}
 	box=std_boxrow(offs=dbx)
 	
 	oss=[]
@@ -100,4 +104,3 @@ def rowboat(sel,**k):
 
 	return '{}{}{}{}{}{}{}{}{}{}'
 	
-a=std_boxrow()

@@ -8,7 +8,7 @@ locales={
 					}}}}}
 def en_cli_main_info():
 	strings={
-		'fn_discript'		:		'\"\"\"Throttlestop : \n Control MSR: BiDirectional Processor Hot \"\"\"',
+		'fn_discript'		:		'Throttlestop : \n Control MSR: BiDirectional Processor Hot',
 		'opt_y'					:		'Dont Ask Questions just do it!',
 		'opt_script'		:		'for use in (automation) scripts implies -y -#',
 		
