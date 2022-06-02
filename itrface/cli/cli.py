@@ -24,7 +24,6 @@ def entry_point(ctx,y,script,stdout,table):
 	# ensure that ctx.obj exists and is a dict (in case `cli()` is called
 	# by means other than the `if` block below)
 	ctx.ensure_object(dict)
-
 	fnx.main.su()
 
 

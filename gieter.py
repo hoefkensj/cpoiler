@@ -21,7 +21,7 @@ def watchit() -> None:
 	"""
 	path=os.path.dirname(sys.argv[0])
 	print(f'monitoring {path}')
-	cmd = shlex.split("watchexec -w './' -d 500 --on-busy-update do-nothing --print-events -- git add --all ")
+	cmd = shlex.split('watchexec '+ f'-w {path}'+' --print-events --on-busy-update do-nothing -- git add --all')
 	proc_watch= subprocess.Popen(cmd ,stdout=subprocess.PIPE, universal_newlines=True)
 	for line in iter(proc_watch.stdout.readline, ''):
 		yield line.split(':')#'/'.join(line.split('->')[0].split('/')[len(srcdir.split('/')):])
@@ -40,6 +40,18 @@ def execute(cmd):
 	if return_code:
 		raise subprocess.CalledProcessError(return_code, cmd)
 
+
+
+
+def analize(line,msg=mk_cmd('git status'),lines=[]):
+ 
+	lines=[line]
+	print(msg().stdout.splitlines())
+
+	print(stat)
+	print(lines)
+	return lines
+	
 # Example
 # for path in execute(["locate", "a"]):
 # # 		print(path, end="")
@@ -47,4 +59,9 @@ def execute(cmd):
 # 	# print(event,end='')
 # 	change=os.path.basename(event.split(':')[1])
 # 	print(change)
-[print(n,event) for n,event in enumerate(watchit())]
+#
+# if __name__ == '__main__':
+
+log=[analize(event) for event in enumerate(watchit())]
+print(log)
+
